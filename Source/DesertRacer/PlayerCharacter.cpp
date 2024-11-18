@@ -54,5 +54,27 @@ void APlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 
 void APlayerCharacter::Move(const FInputActionValue& Value)
 {
-	UE_LOG(LogTemp, Display, TEXT("I'm moving wiiiii"));
+	FVector2D MoveActionValue = Value.Get<FVector2D>();
+	if (CanMove)
+	{
+		if (abs(MoveActionValue.Y) > 0)
+		{
+			float DeltaTime = GetWorld()->DeltaTimeSeconds;
+			float FinalMovementSpeed = (MoveActionValue.Y < 0) ? MovementSpeed * 0.5 : MovementSpeed;
+
+			if (abs(MoveActionValue.X) > 0)
+			{
+				// Negative rotation speed gives us "natural" rotation. Otherwise it would be inversed, D would rotate to the left and A to the right
+				float Rotation = -RotationSpeed * MoveActionValue.X * DeltaTime;
+
+				// Since it's a 2D game, only the Pitch (Z axis) should be affected by rotation
+				AddActorWorldRotation(FRotator(Rotation, 0, 0));
+			}
+
+			FVector DistanceToMove = GetActorUpVector() * FinalMovementSpeed * MoveActionValue.Y * DeltaTime;
+			FVector NewLocation = GetActorLocation() + DistanceToMove;
+
+			SetActorLocation(NewLocation);
+		}
+	}
 }
