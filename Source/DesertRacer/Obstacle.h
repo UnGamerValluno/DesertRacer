@@ -18,6 +18,8 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	UPaperSpriteComponent* ObstacleSprite;
 
+	class ADesertRacerGameMode* GameMode;
+
 	AObstacle();
 
 	virtual void BeginPlay() override;

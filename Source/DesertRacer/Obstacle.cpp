@@ -1,4 +1,7 @@
 #include "Obstacle.h"
+
+#include "DesertRacerGameMode.h"
+#include "Kismet/GameplayStatics.h"
 #include "PlayerCharacter.h"
 
 AObstacle::AObstacle()
@@ -16,6 +19,7 @@ void AObstacle::BeginPlay()
 {
 	Super::BeginPlay();
 
+	GameMode = Cast<ADesertRacerGameMode>(UGameplayStatics::GetGameMode(GetWorld()));
 	CapsuleComponent->OnComponentBeginOverlap.AddDynamic(this, &AObstacle::OverlapBegin);
 }
 
@@ -35,10 +39,11 @@ void AObstacle::OverlapBegin(
 	APlayerCharacter* Player = Cast<APlayerCharacter>(OtherActor);
 	if (Player)
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 10.0f, FColor::White, TEXT("me'strellao"));
+		GEngine->AddOnScreenDebugMessage(-1, 10.0f, FColor::Red, TEXT("me'strellao"));
 		if (Player->CanMove)
 		{
 			Player->CanMove = false;
+			GameMode->ResetLevel(false);
 		}
 	}
 }
