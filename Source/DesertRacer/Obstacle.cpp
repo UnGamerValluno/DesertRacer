@@ -39,7 +39,6 @@ void AObstacle::OverlapBegin(
 	APlayerCharacter* Player = Cast<APlayerCharacter>(OtherActor);
 	if (Player)
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 10.0f, FColor::Red, TEXT("me'strellao"));
 		if (Player->CanMove)
 		{
 			Player->CanMove = false;
