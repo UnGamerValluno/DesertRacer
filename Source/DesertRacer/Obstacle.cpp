@@ -43,7 +43,8 @@ void AObstacle::OverlapBegin(
 		if (Player->CanMove)
 		{
 			Player->CanMove = false;
-			GameMode->ResetLevel(false);
+			UGameplayStatics::PlaySound2D(GetWorld(), HitSound);
+			GameMode->ResetLevel(IsFinishLine);
 		}
 	}
 }

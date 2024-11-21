@@ -4,6 +4,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "PaperSpriteComponent.h"
+#include "Sound/SoundBase.h"
 #include "Obstacle.generated.h"
 
 UCLASS()
@@ -18,12 +19,16 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	UPaperSpriteComponent* ObstacleSprite;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	USoundBase* HitSound;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool IsFinishLine = false;
+
 	class ADesertRacerGameMode* GameMode;
 
 	AObstacle();
-
 	virtual void BeginPlay() override;
-
 	virtual void Tick(float DeltaTime) override;
 
 	UFUNCTION()
