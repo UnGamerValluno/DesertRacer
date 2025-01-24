@@ -6,3 +6,9 @@ Basic 2D game made following the [Unreal Engine 2D Course](https://www.udemy.com
 The base game includes the development of a simple 2D race track using two type of sprites to create an obstacle course
 
 ![](Docs/Images/MainLevel.png)
+
+## Best Time
+This kind of game seemed perfect for a best score kind of mechanic so I applied what I implemented in the [Simple Shooter](https://github.com/UnGamerValluno/SimpleShooter)
+and added a widget to keep track of the current time and the best time during the current playtime
+
+![](Docs/Images/BestTime.png)

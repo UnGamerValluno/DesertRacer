@@ -20,5 +20,6 @@ public:
 	FTimerHandle ResetGameTimer;
 
 	void ResetLevel(bool IsWin);
+	void SetBestTime();
 	void OnResetGameTimerTimeout();
 };
