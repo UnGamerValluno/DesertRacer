@@ -1,3 +1,4 @@
+#include "DesertRacerTimer.h"
 #include "PlayerCharacter.h"
 
 APlayerCharacter::APlayerCharacter()
@@ -30,8 +31,13 @@ void APlayerCharacter::BeginPlay()
 		{
 			Subsystem->AddMappingContext(InputMappingContext, 0);
 		}
-	}
 
+		HUD = CreateWidget(PlayerController, HUDClass);
+		if (HUD != nullptr)
+		{
+			HUD->AddToViewport();
+		}
+	}
 }
 
 void APlayerCharacter::Tick(float DeltaTime)
@@ -76,5 +82,14 @@ void APlayerCharacter::Move(const FInputActionValue& Value)
 
 			SetActorLocation(NewLocation);
 		}
+	}
+}
+
+void APlayerCharacter::NewHighScore()
+{
+	UDesertRacerTimer* Timer = Cast<UDesertRacerTimer>(HUD);
+	if (Timer)
+	{
+		Timer->NewHighScoreAnimation();
 	}
 }
