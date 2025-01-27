@@ -12,3 +12,10 @@ This kind of game seemed perfect for a best score kind of mechanic so I applied 
 and added a widget to keep track of the current time and the best time during the current playtime
 
 ![](Docs/Images/BestTime.png)
+
+## New Best Time
+Additionaly, I felt it was important for the player to be aware when a new best time has been
+achieved so I implemented an animation to change the color and visibility of the best time
+labels so it can get the player's attention and produce a rewrding feeling.
+
+![](Docs/Images/NewBestTime.png)
