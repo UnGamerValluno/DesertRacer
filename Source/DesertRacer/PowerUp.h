@@ -5,33 +5,33 @@
 #include "GameFramework/Actor.h"
 #include "PaperSpriteComponent.h"
 #include "Sound/SoundBase.h"
-#include "Obstacle.generated.h"
+#include "PowerUp.generated.h"
 
 UCLASS()
-class DESERTRACER_API AObstacle : public AActor
+class DESERTRACER_API APowerUp : public AActor
 {
 	GENERATED_BODY()
-	
+
 public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	UCapsuleComponent* CapsuleComponent;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
-	UPaperSpriteComponent* ObstacleSprite;
+	UPaperSpriteComponent* PowerUpSprite;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	USoundBase* HitSound;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	bool IsFinishLine = false;
+	UPROPERTY(EditAnywhere)
+	float TurnRate = 60.f;
 
-	class ADesertRacerGameMode* GameMode;
-
-	AObstacle();
+	APowerUp();
 
 	virtual void BeginPlay() override;
 
 	virtual void Tick(float DeltaTime) override;
+
+	void Rotate(float DeltaTime);
 
 	UFUNCTION()
 	void OverlapBegin(
