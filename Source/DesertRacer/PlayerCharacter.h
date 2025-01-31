@@ -39,6 +39,9 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	UPaperSpriteComponent* CarSprite;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	UPaperSpriteComponent* PowerUpSprite;
+
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	UInputMappingContext* InputMappingContext;
 
@@ -54,6 +57,8 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	bool CanMove = true;
 
+	float BaseSpeed = 1000.0f;
+
 	APlayerCharacter();
 
 	virtual void BeginPlay() override;
@@ -65,4 +70,8 @@ public:
 	void Move(const FInputActionValue& Value);
 
 	void NewHighScore();
+
+	void ActivatePowerUp();
+
+	void DeactivatePowerUp();
 };

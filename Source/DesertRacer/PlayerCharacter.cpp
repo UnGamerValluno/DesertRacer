@@ -5,6 +5,8 @@ APlayerCharacter::APlayerCharacter()
 {
 	PrimaryActorTick.bCanEverTick = true;
 
+	BaseSpeed = MovementSpeed;
+
 	CapsuleComponent = CreateDefaultSubobject<UCapsuleComponent>(TEXT("CapsuleComponent"));
 	SetRootComponent(CapsuleComponent);
 
@@ -17,12 +19,15 @@ APlayerCharacter::APlayerCharacter()
 	CarSprite = CreateDefaultSubobject<UPaperSpriteComponent>(TEXT("CarSprite"));
 	CarSprite->SetupAttachment(RootComponent);
 
+	PowerUpSprite = CreateDefaultSubobject<UPaperSpriteComponent>(TEXT("PowerUpSprite"));
+	PowerUpSprite->SetupAttachment(CarSprite);
 }
 
 void APlayerCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 
+	PowerUpSprite->SetVisibility(false);
 	APlayerController *PlayerController = Cast<APlayerController>(Controller);
 	if (PlayerController)
 	{
@@ -92,4 +97,16 @@ void APlayerCharacter::NewHighScore()
 	{
 		Timer->NewHighScoreAnimation();
 	}
+}
+
+void APlayerCharacter::ActivatePowerUp()
+{
+	MovementSpeed *= 2;
+	PowerUpSprite->SetVisibility(true);
+}
+
+void APlayerCharacter::DeactivatePowerUp()
+{
+	MovementSpeed = BaseSpeed;
+	PowerUpSprite->SetVisibility(false);
 }

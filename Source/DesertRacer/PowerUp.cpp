@@ -1,3 +1,4 @@
+#include "Components/AudioComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "PlayerCharacter.h"
 #include "PowerUp.h"
@@ -45,8 +46,19 @@ void APowerUp::OverlapBegin(
 	APlayerCharacter* Player = Cast<APlayerCharacter>(OtherActor);
 	if (Player)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("I've got the poweeeeerrrr"));
+		GetWorldTimerManager().SetTimer(PowerUpTimer, this, &APowerUp::EndEffect, 1.f, false, EffectTime);
+		Player->ActivatePowerUp();
 		UGameplayStatics::PlaySound2D(GetWorld(), HitSound);
+		PowerUpSprite->SetVisibility(false);
+	}
+}
+
+void APowerUp::EndEffect()
+{
+	APlayerCharacter* Player = Cast<APlayerCharacter>(UGameplayStatics::GetPlayerPawn(GetWorld(), 0));
+	if (Player)
+	{
+		Player->DeactivatePowerUp();
 		Destroy();
 	}
 }

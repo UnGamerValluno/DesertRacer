@@ -2,6 +2,7 @@
 
 #include "Components/CapsuleComponent.h"
 #include "CoreMinimal.h"
+#include "Engine/TimerHandle.h"
 #include "GameFramework/Actor.h"
 #include "PaperSpriteComponent.h"
 #include "Sound/SoundBase.h"
@@ -23,7 +24,12 @@ public:
 	USoundBase* HitSound;
 
 	UPROPERTY(EditAnywhere)
+	float EffectTime = 2.f;
+
+	UPROPERTY(EditAnywhere)
 	float TurnRate = 60.f;
+
+	FTimerHandle PowerUpTimer;
 
 	APowerUp();
 
@@ -41,4 +47,6 @@ public:
 		int32 OtherBodyIndex,
 		bool FromSweep,
 		const FHitResult& SweepResult);
+
+	void EndEffect();
 };
