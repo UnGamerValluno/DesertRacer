@@ -19,3 +19,13 @@ achieved so I implemented an animation to change the color and visibility of the
 labels so it can get the player's attention and produce a rewrding feeling.
 
 ![](Docs/Images/NewBestTime.png)
+
+## Speed Boost Power Up
+Finally, I added a speed boost power up, just to spice things up. Here is how it looks on the track
+
+![](Docs/Images/PowerUp_1.png)
+
+Once the player steps into it, the power up will be activated granting 2X speed for 2 seconds. Also a burst of flames
+will come out of the car and a neat propulsion sound will play 
+
+![](Docs/Images/PowerUp_2.png)
